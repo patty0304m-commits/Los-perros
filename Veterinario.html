@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razas-Cuidados</title>
+    <link rel="stylesheet" href="Vet.css">
+</head>
+<body>
+    <div class="cuadro-azul"></div>
+    <div class="nombre">Características y cuidados</div>
+    <div class="descripcion">
+        <p>Selecciona raza y edad para conocerlos mejor</p>
+    </div>
+        <div class="sidebar">
+        <ul class="sidebar__list">
+            <div class="opcion">
+            <p>¿A dónde vamos?</p></div> 
+            <li class="sidebar__element"><a href="Menu.html">Inicio</a></li>
+            <li class="sidebar__element"><a href="top.html">Características de los popularesa</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="left-section">
+            <div class="perro">
+                <img id="perro-imagen" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632/a09f94112263815.60115792c7673.gif" width="200px">
+            </div> 
+            
+            <div class="Info-grid">
+                <div class="Info-item"> 
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Raza</button>
+                        <div class="dropdown-content" id="raza-dropdown">
+                            <a href="#" data-value="labrador">Labrador</a>
+                            <a href="#" data-value="bulldog">Bulldog</a>
+                            <a href="#" data-value="pastor">Pastor Alemán</a>
+                            <a href="#" data-value="chihuahua">Chihuahua</a>
+                            <a href="#" data-value="poodle">Poodle</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Edad</button>
+                        <div class="dropdown-content" id="edad-dropdown">
+                            <a href="#" data-value="cachorro">Cachorro (0-1 año)</a>
+                            <a href="#" data-value="joven">Joven (1-3 años)</a>
+                            <a href="#" data-value="adulto">Adulto (3-7 años)</a>
+                            <a href="#" data-value="senior">Senior (7+ años)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="listo-btn" id="listo-btn">Listo</button>
+        </div>
+        <div class="right-section">
+            <div class="info-container" id="info-container">
+                <h2>Información para tu amigo</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedRaza = null;
+        let selectedEdad = null;
+        const listoBtn = document.getElementById('listo-btn');
+        const infoContainer = document.getElementById('info-container');
+
+        const imagenesPerros = {
+            labrador: {
+                cachorro: "https://www.shutterstock.com/image-photo/beautiful-golden-retriever-cute-puppy-600nw-2526542701.jpg",
+                joven: "https://img.freepik.com/fotos-premium/joven-labrador-retriever-4-meses-edad_191971-4173.jpg",
+                adulto: "https://cdn0.expertoanimal.com/es/razas/0/0/1/labrador-retriever_100_0_orig.jpg",
+                senior: "https://thumbs.dreamstime.com/b/old-labrador-12-years-7274158.jpg"
+            },
+            bulldog: {
+                cachorro: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJSx0ub4a74mnvE8spxLaYjavmLcroQ3iKWTVdKnXdMLK8v8R_vpUwWqPR&s=10",
+                joven: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsvazsf1fmAuqJp7rXpnbkroAes58lXdjbLuz3wh3T7vuxvP5zOb-bQvY&s=10",
+                adulto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqmpdNeddU0o-Qxhuu_hinLTPH2TTmJzFxQQTidhrxv0EQ4n8eVAovoAcl&s=10",
+                senior: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaN8R6Qbu66zN_T4KDIFYOiCHJrifJQECZ975bIep60aMlxio1FMYF1l8&s=10"
+            },
+            pastor: {
+                cachorro: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM20QK5ZCdE3nyw9x3EZtfvaiyxCcNc2SsDiCsw4CtQJeYL4mmSgBGdGDB&s=10",
+                joven: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd93aM-VOQI7rDquFqDcSTuzGGvNG9SyG7ty9m3cKvsgEwKfBtHGwl49yb&s=10",
+                adulto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwGibku171RG_PhHFENqjU2LPYqc3-EMzPamj3tCYP-cYBYMxgPvPcqA71&s=10",
+                senior: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2f1CQD28DFZJ-28YmDBtlcTwH1pjOmo_cN3iwngsmX2cvzYMH1BuGfoms&s=10"
+            },
+            chihuahua: {
+                cachorro: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNdBtdh_k59NrE6Cerg0dm0DhS1iD21Psad__P2ZEA4zjTOGW8iHEv5oeK&s=10",
+                joven: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfpyvYBoJHkhl7sZA--AcSKtFuE2bgygriL35Zh90qCQ&s",
+                adulto: "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-07Chihuahua-Smooth-Coat.jpg?itok=L2PWsV9_",
+                senior: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeX5PxAH-0tEunM07G2MaJiECA9VUbXDnVc3bTnL90qnGNNMSB7ArKf-Q&s=10"
+            },
+        };
+        
+        function actualizarImagenPerro() {
+            const imgElement = document.getElementById('perro-imagen');
+            
+            if (selectedRaza && selectedEdad) {
+                const imagenUrl = imagenesPerros[selectedRaza][selectedEdad];
+                imgElement.src = imagenUrl;
+            } else {
+                imgElement.src = "https://mir-s3-cdn-cf.behance.net/project_modules/max_632/a09f94112263815.60115792c7673.gif";
+            }
+        }
+        
+        document.querySelectorAll('#raza-dropdown a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const btn = this.closest('.dropdown').querySelector('.dropdown-btn');
+                const value = this.getAttribute('data-value');
+                const text = this.textContent;
+                
+                btn.textContent = text;
+                selectedRaza = value;
+                actualizarImagenPerro(); 
+            });
+        });
+        
+        document.querySelectorAll('#edad-dropdown a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const btn = this.closest('.dropdown').querySelector('.dropdown-btn');
+                const value = this.getAttribute('data-value');
+                const text = this.textContent;
+                
+                btn.textContent = text;
+                selectedEdad = value;
+                actualizarImagenPerro(); 
+            });
+        });
+        
+        function mostrarInformacion() {
+            if (!selectedRaza || !selectedEdad) {
+                alert('Por favor selecciona raza y edad primero');
+                return;
+            }
+            
+            const razas = {
+                labrador: {
+                    nombre: "Labrador Retriever",
+                    descripcion: "Los Labradores son perros amigables, activos y extrovertidos que se llevan bien con otros animales y personas."
+                },
+                bulldog: {
+                    nombre: "Bulldog",
+                    descripcion: "Los Bulldogs son conocidos por su valentía y apariencia distintiva. Son excelentes compañeros familiares."
+                },
+                pastor: {
+                    nombre: "Pastor Alemán",
+                    descripcion: "Perros inteligentes, seguros y valientes. Excelentes para trabajo policial y como perros de servicio."
+                },
+                chihuahua: {
+                    nombre: "Chihuahua",
+                    descripcion: "La raza de perro más pequeña del mundo. Son valientes, alertas y muy leales a sus dueños."
+                },
+                poodle: {
+                    nombre: "Poodle",
+                    descripcion: "Perros extremadamente inteligentes y activos. Disponibles en tres tamaños: toy, miniatura y estándar."
+                }
+            };
+            
+            const edades = {
+                cachorro: "Cachorro (0-1 año)",
+                joven: "Joven (1-3 años)",
+                adulto: "Adulto (3-7 años)",
+                senior: "Senior (7+ años)"
+            };
+            
+            const cuidados = {
+                cachorro: "Los cachorros necesitan alimentación especial rica en nutrientes para su crecimiento. Requieren vacunación completa y socialización temprana.",
+                joven: "Los perros jóvenes necesitan mucho ejercicio y entrenamiento. Es importante establecer rutinas y límites claros.",
+                adulto: "Los adultos necesitan ejercicio regular y una dieta balanceada. Es importante mantener sus chequeos veterinarios anuales.",
+                senior: "Los perros senior requieren dietas especiales, chequeos veterinarios más frecuentes y ejercicio moderado."
+            };
+            
+            infoContainer.innerHTML = `
+                <h2>Cuidados para ${razas[selectedRaza].nombre} (${edades[selectedEdad]})</h2>
+                
+                <div class="info-section">
+                    <h3>Descripción de la raza</h3>
+                    <p>${razas[selectedRaza].descripcion}</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Recomendaciones por edad</h3>
+                    <p>${cuidados[selectedEdad]}</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Consejos específicos</h3>
+                    <ul>
+                        <li>Alimentación: Recomendamos comida premium específica para ${edades[selectedEdad].split(' ')[0]} de raza ${razas[selectedRaza].nombre.split(' ')[0]}</li>
+                        <li>Ejercicio: ${selectedEdad === 'cachorro' ? '15-20 minutos varias veces al día' : selectedEdad === 'senior' ? 'Paseos cortos 2-3 veces al día' : '60 minutos diarios de actividad'}</li>
+                        <li>Cuidados veterinarios: ${selectedEdad === 'cachorro' ? 'Visita mensual para vacunas' : selectedEdad === 'senior' ? 'Chequeo cada 6 meses' : 'Chequeo anual'}</li>
+                        <li>Entrenamiento: ${selectedRaza === 'pastor' ? 'Requiere entrenamiento constante y estimulación mental' : selectedRaza === 'chihuahua' ? 'Socialización temprana para evitar problemas de comportamiento' : 'Entrenamiento básico de obediencia'}</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Datos curiosos</h3>
+                    <p>Los ${razas[selectedRaza].nombre.split(' ')[0]}${selectedEdad === 'cachorro' ? ' cachorros' : selectedEdad === 'senior' ? ' senior' : ''} tienen necesidades específicas que requieren atención especial. Siempre consulta con tu veterinario para un plan personalizado.</p>
+                </div>
+            `;
+            
+            infoContainer.style.display = 'block';
+        }
+        listoBtn.addEventListener('click', mostrarInformacion);
+    </script>
+</body>
+<footer>
+     <div class="derecho">
+            <h2>Terminos y condiciones</h2>
+            <h2>Política de privacidad</h2>
+            <h2>Redes Sociales</h2>
+            <h2>Nosotros</h2>
+        </a>
+    </div>
+</footer>
+</html>
