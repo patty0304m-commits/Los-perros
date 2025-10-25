@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.sidebar {
+    height: 100%;
+    width: 200px; /* Ancho del menú */
+    position: fixed; /* Se mantiene fijo en la pantalla */
+    z-index: 1; /* Asegura que el menú esté sobre otros elementos */
+    top: 0; /* Lo posiciona en la parte superior */
+    background-color: #302e2e; /* Color de fondo del menú */
+    overflow-x: hidden; /* Evita el scroll horizontal */
+    padding-top: 20px;
+}
+
+.sidebar__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar__element {
+    margin-bottom: 10px;
+}
+
+.sidebar__element a {
+    padding: 8px 8px 8px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
+    display: block;
+}
+
+.sidebar__element a:hover {
+    color: #ffffff;
+    background-color: #ff000054;
+}
+
+.content {
+    margin-left: 200px; 
+    padding: 20px;
+}
+
+* 
+{
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cuadro-azul {
+    background-color: #2070c5;  
+    padding: 15.5px;       
+    width: 100%;        
+    box-sizing: border-box; 
+}
+
+.nombre {
+    font-size: 60px;
+    font-weight: bold;
+    color: #df084f;
+    text-align: center;
+    font-family: Helvetica,sans-serif;
+    margin: 0px;
+}
+
+.descripcion{
+    font-size: 25px;
+    line-height: 0.1;
+    font-weight: bold;
+    color: #f96094;
+    text-align: justify;
+    padding: 20px;
+    margin-left: 300px;
+}
+
+.clic{
+    font-size: 25px;
+    line-height: 5;
+    font-weight: bold;
+    color: #f96094;
+    text-align: left;
+}
+
+.perro{
+    margin-left: 200px;
+}
+
+.opcion{
+    font-size: 100%;
+    font-weight: bold;
+    color: #00ffb3;
+    font-family: Helvetica,sans-serif;
+    padding: 30px;
+    text-align: center;
+    text-align-last: center;
+}
+@media (max-width: 1000px) {
+    .fila {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.derecho {
+display: flex;             
+justify-content: center; 
+gap: 200px;                
+color: #ffffff; 
+text-align: center;
+font-size: 7px;
+vertical-align: top;
+align-items: flex-start; 
+margin: 0px;
+padding: 20px 30px 10px 10px;
+}
+
+.derecho h2:hover {
+transition: color 0.1s ease-in-out; 
+cursor: pointer; 
+color: #afacac; 
+}
+
+footer {
+font-family: Arial, Helvetica, sans-serif;
+background-color: #2070c5;
+margin: 0px;   
+padding: 0% 0%;
+min-height: 100%;
+margin-left: 200px;
+}
